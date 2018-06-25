@@ -4,5 +4,10 @@ page-intro {
         img {
             width: 80%;
         }
+        .skip-link {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
     }
 }
