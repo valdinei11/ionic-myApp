@@ -37,6 +37,8 @@ export class FeedPage {
         }
     ];
     public loader;
+    public refresher;
+    public isRefreshing: boolean = false;
     public movie_list = new Array<any>();
     
     constructor(
@@ -57,17 +59,32 @@ export class FeedPage {
     closeLoadingModal() {
         this.loader.dismiss();
     }
+
+    doRefresh(refresher) {
+        this.refresher = refresher;
+        this.isRefreshing = true;
+
+        this.loadMovies();
+    }
     
     // Alterando o final de "Load" para "Enter"
     // Um Load é executado apenas quando recarrega os dados do aplicativo
     // Um Enter é executado quando entra/recarrega a página durante a execução do aplicativo
     ionViewDidEnter() {
+        this.loadMovies();
+    }
+
+    loadMovies() {
         this.openLoadingModal();
         this.movieProvider.getPopularMovies().subscribe(
             data => {
                 this.movie_list = (data as any).results;
                 console.log(data);
                 this.closeLoadingModal();
+                if (this.isRefreshing) {
+                    this.refresher.complete();
+                    this.isRefreshing = false;
+                }
             }, error => {
                 console.log(error);
                 this.closeLoadingModal();
