@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { MovieProvider } from '../../providers/movie/movie';
 
 /**
@@ -36,27 +36,42 @@ export class FeedPage {
             "timeSpend": "84y ago" 
         }
     ];
-
+    public loader;
     public movie_list = new Array<any>();
     
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private movieProvider: MovieProvider
+        private movieProvider: MovieProvider,
+        public loadingCtrl: LoadingController
     ) {
     }
     
-    ionViewDidLoad() {
+    openLoadingModal() {
+        this.loader = this.loadingCtrl.create({
+            content: "Carregando..."
+        });
+        this.loader.present();
+    }
+
+    closeLoadingModal() {
+        this.loader.dismiss();
+    }
+    
+    // Alterando o final de "Load" para "Enter"
+    // Um Load é executado apenas quando recarrega os dados do aplicativo
+    // Um Enter é executado quando entra/recarrega a página durante a execução do aplicativo
+    ionViewDidEnter() {
+        this.openLoadingModal();
         this.movieProvider.getPopularMovies().subscribe(
             data => {
-                // const response = JSON.stringify((data as any));
-                // const object_return = JSON.parse(response);
                 this.movie_list = (data as any).results;
                 console.log(data);
+                this.closeLoadingModal();
             }, error => {
                 console.log(error);
+                this.closeLoadingModal();
             }
         )
     }
-    
 }
