@@ -22,6 +22,10 @@ export class MovieProvider {
     getLatestMovies() {
         return this.http.get(this.baseApiPath + "/movie/latest?api_key=" + this.getApiKey());
     }
+    
+    getMovieDetails(movie_id) {
+        return this.http.get(this.baseApiPath + `/movie/${movie_id}?api_key=` + this.getApiKey());
+    }
 
     getPopularMovies() {
         return this.http.get(this.baseApiPath + "/movie/popular?api_key=" + this.getApiKey());

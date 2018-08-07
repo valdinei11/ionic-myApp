@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { IntroPageModule } from '../pages/intro/intro.module';
 import { ProfilePageModule } from '../pages/profile/profile.module';
 import { SettingsPageModule } from '../pages/settings/settings.module';
+import { MovieDetailsPageModule } from '../pages/movie-details/movie-details.module';
+import { MovieDetailsPage } from '../pages/movie-details/movie-details';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { SettingsPageModule } from '../pages/settings/settings.module';
     IntroPageModule,
     HttpClientModule,
     SettingsPageModule,
-    ProfilePageModule
+    ProfilePageModule,
+    MovieDetailsPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,7 +43,8 @@ import { SettingsPageModule } from '../pages/settings/settings.module';
     ContactPage,
     HomePage,
     TabsPage,
-    FeedPage
+    FeedPage,
+    MovieDetailsPage
   ],
   providers: [
     StatusBar,

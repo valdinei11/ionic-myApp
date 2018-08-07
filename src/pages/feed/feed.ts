@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { MovieProvider } from '../../providers/movie/movie';
+import { MovieDetailsPage } from '../movie-details/movie-details';
 
 /**
 * Generated class for the FeedPage page.
@@ -18,24 +19,6 @@ import { MovieProvider } from '../../providers/movie/movie';
     ]
 })
 export class FeedPage {
-    public posts = [
-        {
-            "username": "Calvin Klein",
-            "date": "November 5, 1955",
-            "imgURL": "https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-bttf.png",
-            "numLikes": "12",
-            "numComments": "4",
-            "timeSpend": "11h ago"
-        },
-        {
-            "username": "Valdinei Ferreira",
-            "date": "August 8, 2018",
-            "content": "Hello, bitches",
-            "numLikes": "42",
-            "numComments": "8",
-            "timeSpend": "84y ago" 
-        }
-    ];
     public loader;
     public refresher;
     public isRefreshing: boolean = false;
@@ -47,6 +30,10 @@ export class FeedPage {
         private movieProvider: MovieProvider,
         public loadingCtrl: LoadingController
     ) {
+    }
+
+    openMovieDetails(movie) {
+        this.navCtrl.push(MovieDetailsPage, {movie_id: movie.id});
     }
     
     openLoadingModal() {

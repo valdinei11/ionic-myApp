@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="movie">{{ movie.title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngIf="movie">
+      <ion-row text-center>
+        <ion-col padding>
+          <ion-icon large name="star"></ion-icon>
+          <h3>{{ movie.vote_average }}</h3>
+          <sub>{{ movie.vote_count }} votos</sub>
+        </ion-col>
+        <ion-col padding>
+          <h2>Popularidade:</h2>
+          <h3>{{ movie.popularity }}</h3>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <strong>Gênero(s):</strong> {{ movie.genres }}
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <img [src]="'https://image.tmdb.org/t/p/w300/' + movie.backdrop_path">
+    
+      <ion-card-content>
+        <p class="feed-body text-justify">{{ movie.overview }}</p>
+      </ion-card-content>
+    </ion-card>
+</ion-content>
